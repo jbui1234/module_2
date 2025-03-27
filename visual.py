@@ -5,7 +5,6 @@ import matplotlib.cm as cm
 import numpy as np
 import random
 
-# Load and clean data
 df = pd.read_csv('country_city.csv')
 df = df.dropna(subset=['City', 'Country'])
 df['City'] = df['City'].astype(str).str.strip()
@@ -43,7 +42,6 @@ for i, country in enumerate(countries):
     y = radius * np.sin(theta)
     country_positions[country] = (x, y)
 
-# Assign positions to cities with jitter within country
 pos = {}
 random.seed(42)
 for node in G.nodes:

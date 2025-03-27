@@ -2,7 +2,6 @@ import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 
-# Load datasets
 country_city_df = pd.read_csv('country_city.csv')
 
 # Drop rows with missing City or Country
@@ -17,10 +16,7 @@ country_city_df['Annual ridership (millions)'] = pd.to_numeric(
     country_city_df['Annual ridership (millions)'], errors='coerce'
 ).fillna(0.0)
 
-# Create graph
 G = nx.Graph()
-
-# Add nodes
 for _, row in country_city_df.iterrows():
     city = row['City']
     G.add_node(city, 
@@ -51,7 +47,7 @@ top_betweenness = sorted(betweenness_centrality.items(), key=lambda x: x[1], rev
 top_eigenvector = sorted(eigenvector_centrality.items(), key=lambda x: x[1], reverse=True)[:10]
 top_weighted = sorted(weighted_centrality.items(), key=lambda x: x[1], reverse=True)[:10]
 
-# Print results
+
 print("\nTop 10 by Degree Centrality:")
 for city, val in top_degree:
     print(f"{city}: {val:.4f}")
@@ -68,7 +64,6 @@ print("\nTop 10 by Weighted Centrality (Ridership):")
 for city, val in top_weighted:
     print(f"{city}: {val:.2f} million riders")
 
-# Visualize
 plt.figure(figsize=(12, 12))
 node_size = [v * 2000 for v in degree_centrality.values()]
 nx.draw(G, with_labels=True, node_size=node_size, font_size=8, node_color='skyblue', font_weight='bold')

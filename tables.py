@@ -2,7 +2,7 @@ import pandas as pd
 import networkx as nx
 from prettytable import PrettyTable
 
-# Load and clean data
+
 df = pd.read_csv('country_city.csv')
 df = df.dropna(subset=['City', 'Country'])
 df['City'] = df['City'].astype(str).str.strip()
